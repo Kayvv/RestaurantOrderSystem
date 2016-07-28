@@ -11,9 +11,15 @@ import android.widget.TextView;
  * Created by Kay on 27/07/2016.
  */
 public class DishFragment extends Fragment {
+
+    //--static--
+    public static final String EXTRA_DISH_ID = "nz.ac.unitec.restaurantordersystem.dish_id";
+
     //--field--
     private TextView dishName;
     private Dish mDish;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){

@@ -17,6 +17,10 @@ public class Dish {
         mId = UUID.randomUUID();
     }
 
+    public UUID getId() {
+        return mId;
+    }
+
     public String getDescription() {
         return mDescription;
     }

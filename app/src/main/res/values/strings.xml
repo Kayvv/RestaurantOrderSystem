@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RestaurantOrderSystem</string>
+    <string name="dish_name">Dish Name</string>
 </resources>

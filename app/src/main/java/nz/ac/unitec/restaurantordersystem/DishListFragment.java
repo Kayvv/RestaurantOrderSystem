@@ -1,12 +1,11 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Kay on 27/07/2016.
  */
-public class DishListFragment extends Fragment {
+public class DishListFragment extends ListFragment {
     private static final String TAG = "CrimeListFragment";
     private ArrayList<Dish> mCrimes;
 
@@ -25,18 +24,18 @@ public class DishListFragment extends Fragment {
         getActivity().setTitle(R.string.dish_name);
         mCrimes = DishLab.get(getActivity()).getDishes();
 
-        CrimeAdapter adapter = new DishAdapter(mCrimes);
+        DishAdapter adapter = new DishAdapter(mCrimes);
         setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         //Get the Crime from the adapter
-        Dish c = ((CrimeAdapter)getListAdapter()).getItem(position);
+        Dish c = ((DishAdapter)getListAdapter()).getItem(position);
 
         //Start CrimeActivity
         Intent i = new Intent(getActivity(), DishActivity.class);
-        i.putExtra(DishFragment.EXTRA_CRIME_ID, c.getId());
+        i.putExtra(DishFragment.EXTRA_DISH_ID, c.getId());
         startActivity(i);
     }
 
@@ -57,15 +56,8 @@ public class DishListFragment extends Fragment {
             //Configure the view for this Crime
             Dish c = getItem(position);
             TextView titleTextView =
-                    (TextView)convertView.findViewById(R.id.crime_list_item_titleTextView);
-            titleTextView.setText(c.getTitle());
-            TextView dateTextView =
-                    (TextView)convertView.findViewById(R.id.crime_list_item_dateTextView);
-            dateTextView.setText(c.getDate().toString());
-            CheckBox solvedCheckBox =
-                    (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
-            solvedCheckBox.setChecked(c.isSolved());
-
+                    (TextView)convertView.findViewById(R.id.dish_list_item_name);
+            titleTextView.setText(c.getName());
             return convertView;
         }
     }
