@@ -3,6 +3,7 @@ package nz.ac.unitec.restaurantordersystem;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Kay on 27/07/2016.
@@ -32,5 +33,15 @@ public class DishLab {
     public ArrayList<Dish> getDishes(){
         return mDishes;
     }
+
+    public Dish getDish(UUID id){
+        for(Dish d:mDishes){
+            if(d.getId()==id){
+                return d;
+            }
+        }
+        return null;
+    }
+
 
 }

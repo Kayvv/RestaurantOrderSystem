@@ -1,31 +1,46 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.app.ListFragment;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kay on 27/07/2016.
  */
-public class DishListFragment extends ListFragment {
+public class DishListFragment extends Fragment {
     private static final String TAG = "CrimeListFragment";
-    private ArrayList<Dish> mCrimes;
+
+    private RecyclerView mDishRecyclerView;
+    private DishAdapter mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        getActivity().setTitle(R.string.dish_name);
-        mCrimes = DishLab.get(getActivity()).getDishes();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_dish_list,container,false);
 
-        DishAdapter adapter = new DishAdapter(mCrimes);
-        setListAdapter(adapter);
+        mDishRecyclerView = (RecyclerView)view.findViewById(R.id.dish_recycler_view);
+        mDishRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        updateUI();
+
+        return view;
+    }
+
+    private void updateUI(){
+        DishLab dishLab = DishLab.get(getActivity());
+        List<Dish> dishes = dishLab.getDishes();
+
+        mAdapter = new DishAdapter(dishes);
+        mDishRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -39,27 +54,44 @@ public class DishListFragment extends ListFragment {
         startActivity(i);
     }
 
-    private class DishAdapter extends ArrayAdapter<Dish> {
+    private class DishAdapter extends RecyclerView.Adapter<DishHolder> {
 
-        public DishAdapter(ArrayList<Dish> crimes){
-            super(getActivity(),0,crimes);
+        private List<Dish> mDishes;
+
+        public DishAdapter(List<Dish> dishes){
+            mDishes = dishes;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent){
-            //If we weren't given a view, inflate one
-            if(convertView == null){
-                convertView = getActivity().getLayoutInflater()
-                        .inflate(R.layout.list_item_dish,null);
-            }
-
-            //Configure the view for this Crime
-            Dish c = getItem(position);
-            TextView titleTextView =
-                    (TextView)convertView.findViewById(R.id.dish_list_item_name);
-            titleTextView.setText(c.getName());
-            return convertView;
+        public DishHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1,parent,false);
+            return new DishHolder(view);
         }
+
+        @Override
+        public void onBindViewHolder(DishHolder holder, int position) {
+            Dish dish = mDishes.get(position);
+            holder.mTitleTextView.setText(dish.getName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDishes.size();
+        }
+
+    }
+
+    //define the ViewHolder by inner class
+    private class DishHolder extends RecyclerView.ViewHolder{
+        public TextView mTitleTextView;
+
+        public DishHolder(View itemView) {
+            super(itemView);
+
+            mTitleTextView = (TextView)itemView;
+        }
+
     }
 
 
