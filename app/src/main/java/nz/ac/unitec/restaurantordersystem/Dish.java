@@ -13,7 +13,7 @@ public class Dish {
     private float mPrice;
     private String mImage;
 
-    public void Dish(){
+    public Dish(){
         mId = UUID.randomUUID();
     }
 

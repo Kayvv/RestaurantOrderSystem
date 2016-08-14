@@ -8,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,24 +33,23 @@ public class DishListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI(){
         DishLab dishLab = DishLab.get(getActivity());
         List<Dish> dishes = dishLab.getDishes();
-
-        mAdapter = new DishAdapter(dishes);
-        mDishRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new DishAdapter(dishes);
+            mDishRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id){
-        //Get the Crime from the adapter
-        Dish c = ((DishAdapter)getListAdapter()).getItem(position);
-
-        //Start CrimeActivity
-        Intent i = new Intent(getActivity(), DishActivity.class);
-        i.putExtra(DishFragment.EXTRA_DISH_ID, c.getId());
-        startActivity(i);
-    }
 
     private class DishAdapter extends RecyclerView.Adapter<DishHolder> {
 
@@ -65,14 +62,14 @@ public class DishListFragment extends Fragment {
         @Override
         public DishHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1,parent,false);
+            View view = layoutInflater.inflate(R.layout.list_item_dish, parent, false);
             return new DishHolder(view);
         }
 
         @Override
         public void onBindViewHolder(DishHolder holder, int position) {
             Dish dish = mDishes.get(position);
-            holder.mTitleTextView.setText(dish.getName());
+            holder.bindDish(dish);
         }
 
         @Override
@@ -83,15 +80,33 @@ public class DishListFragment extends Fragment {
     }
 
     //define the ViewHolder by inner class
-    private class DishHolder extends RecyclerView.ViewHolder{
-        public TextView mTitleTextView;
+    private class DishHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView mTitleTextView;
+        private TextView mDateTextView;
+
+        private Dish mDish;
 
         public DishHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView)itemView;
+            mTitleTextView = (TextView)
+                    itemView.findViewById(R.id.list_item_dish_title_text_view);
+            mDateTextView = (TextView)
+                    itemView.findViewById(R.id.list_item_dish_date_text_view);
         }
 
+        public void bindDish(Dish dish) {
+            mDish = dish;
+            mTitleTextView.setText(mDish.getName());
+            mDateTextView.setText(mDish.getDescription());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = DishPagerActivity.newIntent(getActivity(), mDish.getId());
+            startActivity(intent);
+        }
     }
 
 

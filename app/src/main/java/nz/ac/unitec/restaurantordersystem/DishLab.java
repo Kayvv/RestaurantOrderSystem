@@ -17,9 +17,10 @@ public class DishLab {
         mAppContext = appContext;
         mDishes = new ArrayList<Dish>();
         for (int i = 0; i < 100; i++) {
-            Dish c = new Dish();
-            c.setName("Dish #" + i);
-            mDishes.add(c);
+            Dish d = new Dish();
+            d.setName("Dish #" + i);
+            d.setDescription("Description#"+i);
+            mDishes.add(d);
         }
     }
 
@@ -35,13 +36,11 @@ public class DishLab {
     }
 
     public Dish getDish(UUID id){
-        for(Dish d:mDishes){
-            if(d.getId()==id){
+        for(Dish d : mDishes){
+            if(d.getId().equals(id)){
                 return d;
             }
         }
         return null;
     }
-
-
 }
