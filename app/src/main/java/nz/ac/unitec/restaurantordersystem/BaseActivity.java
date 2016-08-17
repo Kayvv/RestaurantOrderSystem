@@ -1,14 +1,14 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Kay on 27/07/2016.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
     public abstract Fragment createFragment();
 
     @Override

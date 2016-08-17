@@ -15,6 +15,8 @@ public class Dish {
 
     public Dish(){
         mId = UUID.randomUUID();
+        mName = "Dish test";
+        mDescription = "Description test";
     }
 
     public UUID getId() {
