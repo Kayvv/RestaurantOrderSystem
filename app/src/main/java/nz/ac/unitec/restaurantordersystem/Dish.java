@@ -13,11 +13,19 @@ public class Dish {
     private float mPrice;
     private String mImage;
 
+
     public Dish(){
         mId = UUID.randomUUID();
         mName = "Dish test";
         mDescription = "Description test";
     }
+
+    public Dish(UUID id){
+        mId = id;
+        mName = "Dish test";
+        mDescription = "Description test";
+    }
+
 
     public UUID getId() {
         return mId;

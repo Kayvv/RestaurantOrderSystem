@@ -38,7 +38,13 @@ public class DishFragment extends Fragment {
         UUID dishId = (UUID)getArguments().getSerializable(ARG_DISH_ID);
         mDish = DishLab.get(getActivity()).getDish(dishId);
 
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        DishLab.get(getActivity())
+                .updateDish(mDish);
     }
 
     @Override

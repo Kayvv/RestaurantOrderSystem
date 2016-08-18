@@ -112,6 +112,7 @@ public class DishListFragment extends Fragment {
             mAdapter = new DishAdapter(dishes);
             mDishRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setDishes(dishes);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -142,6 +143,10 @@ public class DishListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mDishes.size();
+        }
+
+        public void setDishes(List<Dish> dishes) {
+            mDishes = dishes;
         }
 
     }
