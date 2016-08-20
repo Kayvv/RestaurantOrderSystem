@@ -1,7 +1,9 @@
 package nz.ac.unitec.restaurantordersystem;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -92,7 +94,32 @@ public class DishFragment extends Fragment {
 
 
         mPhotoView = (ImageView) v.findViewById(R.id.dish_photo);
+        updatePhotoView();
+
         return v;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_DATE) {
+
+        } else if (requestCode == REQUEST_CONTACT && data != null) {
+
+        } else if (requestCode == REQUEST_PHOTO) {
+            updatePhotoView();
+        }
+    }
+
+    private void updatePhotoView(){
+        if(mPhotoFile == null|| !mPhotoFile.exists()){
+            mPhotoView.setImageDrawable(null);
+        }else{
+            Bitmap bitmap = PictureUtils.getScaledBitmap(
+                    mPhotoFile.getPath(),getActivity());
+            mPhotoView.setImageBitmap(bitmap);
+        }
     }
 
 
