@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">RestaurantOrderSystem</string>
+    <string name="dish_title_label">Title</string>
+    <string name="dish_title_hint">Dish Title</string>
     <string name="dish_name">Dish Name</string>
     <string name="new_dish">New Dish</string>
     <string name="show_subtitle">Show Subtitle</string>

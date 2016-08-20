@@ -62,4 +62,8 @@ public class Dish {
     public void setPrice(float price) {
         mPrice = price;
     }
+
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
 }
