@@ -25,6 +25,9 @@
         <activity android:name = ".DishPagerActivity"
                   android:parentActivityName=".DishListActivity"></activity>
 
+        <activity android:name = ".DishAddActivity"
+                  android:parentActivityName=".DishListActivity"></activity>
+
     </application>
 
 </manifest>

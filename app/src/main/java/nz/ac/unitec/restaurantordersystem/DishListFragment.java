@@ -78,10 +78,7 @@ public class DishListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_dish:
-                Dish dish = new Dish();
-                DishLab.get(getActivity()).addDish(dish);
-                Intent intent = DishPagerActivity
-                        .newIntent(getActivity(), dish.getId());
+                Intent intent = new Intent(getActivity(),DishAddActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_item_show_subtitle:
