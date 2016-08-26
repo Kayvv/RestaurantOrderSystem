@@ -2,6 +2,7 @@ package nz.ac.unitec.restaurantordersystem;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -152,6 +155,8 @@ public class DishListFragment extends Fragment {
     private class DishHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private ImageView mPhotoView;
+        private File mPhotoFile;
 
         private Dish mDish;
 
@@ -159,6 +164,8 @@ public class DishListFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
 
+            mPhotoView = (ImageView)
+                    itemView.findViewById(R.id.dish_photo);
             mTitleTextView = (TextView)
                     itemView.findViewById(R.id.list_item_dish_title_text_view);
             mDateTextView = (TextView)
@@ -167,14 +174,26 @@ public class DishListFragment extends Fragment {
 
         public void bindDish(Dish dish) {
             mDish = dish;
+            mPhotoFile = DishLab.get(getActivity()).getPhotoFile(mDish);
             mTitleTextView.setText(mDish.getName());
             mDateTextView.setText(mDish.getDescription());
+            updatePhotoView();
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = DishPagerActivity.newIntent(getActivity(), mDish.getId());
             startActivity(intent);
+        }
+
+        private void updatePhotoView(){
+            if(mPhotoFile == null|| !mPhotoFile.exists()){
+                mPhotoView.setImageDrawable(null);
+            }else{
+                Bitmap bitmap = PictureUtils.getScaledBitmap(
+                        mPhotoFile.getPath(),getActivity());
+                mPhotoView.setImageBitmap(bitmap);
+            }
         }
     }
 
