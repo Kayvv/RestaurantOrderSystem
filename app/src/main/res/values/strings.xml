@@ -8,4 +8,7 @@
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="subtitle_format">%1$s dishes</string>
+    <string name="price_label">Price</string>
+    <string name="description_label">Description</string>
+    <string name="add_to_shopping_cart">Add To Shopping Cart</string>
 </resources>

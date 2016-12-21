@@ -12,8 +12,8 @@
 
         <ImageView
             android:id = "@+id/dish_photo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerInside"
             android:background="@android:color/darker_gray"
             android:cropToPadding="true"/>
@@ -38,6 +38,17 @@
             style="?android:listSeparatorTextViewStyle"/>
         <EditText
             android:id="@+id/dish_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:hint="@string/dish_title_hint"/>
+        <TextView
+            android:text="@string/price_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:listSeparatorTextViewStyle"/>
+        <EditText
+            android:id="@+id/dish_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"

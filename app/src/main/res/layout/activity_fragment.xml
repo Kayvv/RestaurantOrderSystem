@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
               android:orientation="vertical"
               android:id = "@+id/fragmentContainer"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
 </LinearLayout>
+
+<RadioGroup
+    android:id="@+id/mainMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/dish_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/radio_pressed"
+        android:button="@null"
+        android:drawableTop="@drawable/ic_menu_add"
+        android:gravity="center_horizontal"
+        android:text="Menu"/>
+    <RadioButton
+        android:id="@+id/shopping_cart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/radio_pressed"
+        android:button="@null"
+        android:drawableTop="@drawable/ic_menu_add"
+        android:gravity="center_horizontal"
+        android:text="Menu"/>
+    <RadioButton
+        android:id="@+id/order_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/radio_pressed"
+        android:button="@null"
+        android:drawableTop="@drawable/ic_menu_add"
+        android:gravity="center_horizontal"
+        android:text="Menu"/>
+    <RadioButton
+        android:id="@+id/user_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/radio_pressed"
+        android:button="@null"
+        android:drawableTop="@drawable/ic_menu_add"
+        android:gravity="center_horizontal"
+        android:text="Menu"/>
+
+</RadioGroup>
+</RelativeLayout>
