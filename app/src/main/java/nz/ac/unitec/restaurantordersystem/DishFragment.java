@@ -11,11 +11,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -36,6 +38,7 @@ public class DishFragment extends Fragment {
     private Dish mDish;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
+    private Button mAddToShoppingCart;
 
 
     public static DishFragment newInstance(UUID dishId) {
@@ -70,6 +73,15 @@ public class DishFragment extends Fragment {
         mDishName.setText(mDish.getName());
         mDescription = (TextView)v.findViewById(R.id.dishDescription);
         mDescription.setText(mDish.getDescription());
+        mAddToShoppingCart = (Button)v.findViewById(R.id.dishOrder);
+        mAddToShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingCart shoppingCart=ShoppingCart.get(getActivity());
+                List<Dish> orderedDish = shoppingCart.getDishes();
+                orderedDish.add(mDish);
+            }
+        });
 
         PackageManager packageManager = getActivity().getPackageManager();
 

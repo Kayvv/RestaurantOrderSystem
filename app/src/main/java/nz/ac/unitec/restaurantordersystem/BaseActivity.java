@@ -24,4 +24,13 @@ public abstract class BaseActivity extends AppCompatActivity {
                     .commit();
         }
     }
+
+    public void changeFragment(Fragment fragment){
+        FragmentManager fm = getFragmentManager();
+        Fragment fragmentContainer = fm.findFragmentById(R.id.fragmentContainer);
+            fragmentContainer = fragment;
+            fm.beginTransaction()
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit();
+    }
 }
