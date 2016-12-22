@@ -4,13 +4,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,15 +18,14 @@ import java.util.List;
 /**
  * Created by Kay on 2016/12/22.
  */
-public class BaseListFragment extends Fragment {
+public abstract class BaseListFragment extends Fragment {
 
-    private RecyclerView mDishRecyclerView;
-    private DishAdapter mAdapter;
+    public RecyclerView mDishRecyclerView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -39,10 +34,7 @@ public class BaseListFragment extends Fragment {
 
         mDishRecyclerView = (RecyclerView)view.findViewById(R.id.dish_recycler_view);
         mDishRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         updateUI();
-
         return view;
     }
 
@@ -57,41 +49,11 @@ public class BaseListFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_dish_list, menu);
+
+    public abstract void updateUI();
 
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_new_dish:
-                Intent intent = new Intent(getActivity(),DishAddActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
-    private void updateUI(){
-        DishLab dishLab = DishLab.get(getActivity());
-        List<Dish> dishes = dishLab.getDishes();
-        if (mAdapter == null) {
-            mAdapter = new DishAdapter(dishes);
-            mDishRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter.setDishes(dishes);
-            mAdapter.notifyDataSetChanged();
-        }
-    }
-
-
-    private class DishAdapter extends RecyclerView.Adapter<DishHolder> {
+    public class DishAdapter extends RecyclerView.Adapter<DishHolder> {
 
         private List<Dish> mDishes;
 

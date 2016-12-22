@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,8 +79,7 @@ public class DishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ShoppingCart shoppingCart=ShoppingCart.get(getActivity());
-                List<Dish> orderedDish = shoppingCart.getDishes();
-                orderedDish.add(mDish);
+                shoppingCart.addDish(mDish);
             }
         });
 

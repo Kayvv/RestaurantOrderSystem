@@ -26,7 +26,7 @@
         android:button="@null"
         android:drawableTop="@drawable/ic_menu_add"
         android:gravity="center_horizontal"
-        android:text="Menu"/>
+        android:text="Menu" />
     <RadioButton
         android:id="@+id/shopping_cart"
         android:layout_width="0dp"
