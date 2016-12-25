@@ -1,9 +1,9 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +56,7 @@ public class DishListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mDishRecyclerView.setAdapter(mAdapter);
         updateUI();
         Log.d("DishListFragment","resume");
     }
@@ -107,7 +108,7 @@ public class DishListFragment extends Fragment {
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
-    private void updateUI(){
+    public void updateUI(){
         DishLab dishLab = DishLab.get(getActivity());
         List<Dish> dishes = dishLab.getDishes();
         Log.d(TAG,"updateUI");
@@ -123,7 +124,8 @@ public class DishListFragment extends Fragment {
     }
 
 
-    private class DishAdapter extends RecyclerView.Adapter<DishHolder> {
+
+    public class DishAdapter extends RecyclerView.Adapter<DishListFragment.DishHolder> {
 
         private List<Dish> mDishes;
 
@@ -132,14 +134,14 @@ public class DishListFragment extends Fragment {
         }
 
         @Override
-        public DishHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public DishListFragment.DishHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_item_dish, parent, false);
-            return new DishHolder(view);
+            return new DishListFragment.DishHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(DishHolder holder, int position) {
+        public void onBindViewHolder(DishListFragment.DishHolder holder, int position) {
             Dish dish = mDishes.get(position);
             holder.bindDish(dish);
         }
@@ -200,6 +202,5 @@ public class DishListFragment extends Fragment {
             }
         }
     }
-
 
 }

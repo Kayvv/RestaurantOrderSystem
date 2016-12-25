@@ -1,9 +1,8 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -60,19 +59,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.dish_list:
                 setFragment(mDishListFragment);
-                Log.d("shoppingcart","shoppingcart");
+                Log.d("DishList","DishListFragment");
                 break;
             case R.id.shopping_cart:
                 setFragment(mShoppingCartFragment);
-                Log.d("shoppingcart","shoppingcart");
+                Log.d("ShoppingCart","ShoppingCart");
                 break;
             case R.id.order_list:
                 setFragment(mShoppingCartFragment);
-                Log.d("shoppingcart","shoppingcart");
+                Log.d("OrderList","OrderList");
                 break;
             case R.id.user_info:
                 setFragment(mShoppingCartFragment);
-                Log.d("shoppingcart","shoppingcart");
+                Log.d("UserInfo","UserInfo");
                 break;
             default:
                 break;

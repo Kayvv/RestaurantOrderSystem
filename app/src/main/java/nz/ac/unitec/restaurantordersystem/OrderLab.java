@@ -43,22 +43,22 @@ public class OrderLab {
     }
 
     public List<Order> getOrderes(){
-        List<Order> Orderes = new ArrayList<>();
-        OrderCursorWrapper cursor = queryOrderes(null, null);
+        List<Order> Orders = new ArrayList<>();
+        OrderCursorWrapper cursor = queryOrders(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Orderes.add(cursor.getOrder());
+                Orders.add(cursor.getOrder());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        return Orderes;
+        return Orders;
     }
 
     public Order getOrder(UUID id){
-        OrderCursorWrapper cursor = queryOrderes(
+        OrderCursorWrapper cursor = queryOrders(
                 OrderTable.Cols.UUID + " = ?",
                 new String[]{id.toString()}
         );
@@ -102,7 +102,7 @@ public class OrderLab {
     }
 
 
-    private OrderCursorWrapper queryOrderes(String whereClause, String[] whereArgs) {
+    private OrderCursorWrapper queryOrders(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 OrderTable.NAME,
                 null, // Columns - null selects all columns
