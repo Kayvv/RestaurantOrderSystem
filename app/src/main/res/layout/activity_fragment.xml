@@ -24,9 +24,9 @@
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
-        android:drawableTop="@drawable/ic_menu_add"
+        android:drawableTop="@drawable/ic_button_menu"
         android:gravity="center_horizontal"
-        android:text="Menu" />
+        android:text="@string/menu" />
     <RadioButton
         android:id="@+id/shopping_cart"
         android:layout_width="0dp"
@@ -34,9 +34,9 @@
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
-        android:drawableTop="@drawable/ic_menu_add"
+        android:drawableTop="@drawable/ic_button_cart"
         android:gravity="center_horizontal"
-        android:text="Menu"/>
+        android:text="@string/shopping_cart"/>
     <RadioButton
         android:id="@+id/order_list"
         android:layout_width="0dp"
@@ -46,7 +46,7 @@
         android:button="@null"
         android:drawableTop="@drawable/ic_menu_add"
         android:gravity="center_horizontal"
-        android:text="Menu"/>
+        android:text="@string/my_order"/>
     <RadioButton
         android:id="@+id/user_info"
         android:layout_width="0dp"
@@ -56,7 +56,7 @@
         android:button="@null"
         android:drawableTop="@drawable/ic_menu_add"
         android:gravity="center_horizontal"
-        android:text="Menu"/>
+        android:text="@string/my_info"/>
 
 </RadioGroup>
 </RelativeLayout>

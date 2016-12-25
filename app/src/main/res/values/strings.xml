@@ -12,4 +12,8 @@
     <string name="description_label">Description</string>
     <string name="add_to_shopping_cart">Add To Shopping Cart</string>
     <string name="check_out">Check Out</string>
+    <string name="menu">Menu</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="my_order">My Order</string>
+    <string name="my_info">My Info</string>
 </resources>
