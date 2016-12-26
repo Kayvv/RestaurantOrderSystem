@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 <LinearLayout
               android:orientation="vertical"
               android:id = "@+id/fragmentContainer"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="0dp"
+    android:layout_weight="7">
 </LinearLayout>
 
 <RadioGroup
     android:id="@+id/mainMenu"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     android:gravity="center_horizontal"
     android:orientation="horizontal">
 
     <RadioButton
         android:id="@+id/dish_list"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
         android:drawableTop="@drawable/ic_button_menu"
-        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:text="@string/menu" />
     <RadioButton
         android:id="@+id/shopping_cart"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
         android:drawableTop="@drawable/ic_button_cart"
-        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:text="@string/shopping_cart"/>
     <RadioButton
         android:id="@+id/order_list"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
-        android:drawableTop="@drawable/ic_menu_add"
-        android:gravity="center_horizontal"
+        android:drawableTop="@drawable/ic_button_order"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:text="@string/my_order"/>
     <RadioButton
         android:id="@+id/user_info"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/radio_pressed"
         android:button="@null"
-        android:drawableTop="@drawable/ic_menu_add"
-        android:gravity="center_horizontal"
+        android:drawableTop="@drawable/ic_button_user"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:text="@string/my_info"/>
 
 </RadioGroup>
-</RelativeLayout>
+</LinearLayout>

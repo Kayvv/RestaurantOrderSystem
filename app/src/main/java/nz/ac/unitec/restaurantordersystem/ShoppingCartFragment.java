@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +29,6 @@ public class ShoppingCartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("onCreate","shopping");
     }
 
     @Override
@@ -52,12 +53,13 @@ public class ShoppingCartFragment extends Fragment {
     public void updateUI(){
         ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
         List<Dish> dishes = shoppingCart.getDishes();
+        List<Integer> dishCount = shoppingCart.getDishCount();
         if (mAdapter == null) {
-            mAdapter = new DishAdapter(dishes);
+            mAdapter = new DishAdapter(dishes,dishCount);
             Log.d("test",dishes.toString());
             mDishRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setDishes(dishes);
+            mAdapter.setDishes(dishes,dishCount);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -68,9 +70,11 @@ public class ShoppingCartFragment extends Fragment {
     public class DishAdapter extends RecyclerView.Adapter<ShoppingCartFragment.DishHolder> {
 
         private List<Dish> mDishes;
+        private List<Integer> mDishCount;
 
-        public DishAdapter(List<Dish> dishes){
+        public DishAdapter(List<Dish> dishes, List<Integer> dishCount){
             mDishes = dishes;
+            mDishCount = dishCount;
         }
 
         @Override
@@ -83,7 +87,8 @@ public class ShoppingCartFragment extends Fragment {
         @Override
         public void onBindViewHolder(ShoppingCartFragment.DishHolder holder, int position) {
             Dish dish = mDishes.get(position);
-            holder.bindDish(dish);
+            Integer dishCount = mDishCount.get(position);
+            holder.bindDish(dish,dishCount);
         }
 
         @Override
@@ -91,8 +96,9 @@ public class ShoppingCartFragment extends Fragment {
             return mDishes.size();
         }
 
-        public void setDishes(List<Dish> dishes) {
+        public void setDishes(List<Dish> dishes,List<Integer> dishCount) {
             mDishes = dishes;
+            mDishCount = dishCount;
         }
 
     }
@@ -103,6 +109,10 @@ public class ShoppingCartFragment extends Fragment {
         private TextView mDateTextView;
         private ImageView mPhotoView;
         private File mPhotoFile;
+        private EditText mDishCount;
+        private ImageButton mDishReduce;
+        private ImageButton mDishAdd;
+
 
         private Dish mDish;
 
@@ -116,20 +126,39 @@ public class ShoppingCartFragment extends Fragment {
                     itemView.findViewById(R.id.list_item_dish_title_text_view);
             mDateTextView = (TextView)
                     itemView.findViewById(R.id.list_item_dish_date_text_view);
+            mDishCount = (EditText)itemView.findViewById(R.id.dish_count);
+            mDishAdd = (ImageButton)itemView.findViewById(R.id.dish_add);
+            mDishAdd.setOnClickListener(this);
+            mDishReduce = (ImageButton)itemView.findViewById(R.id.dish_reduce);
+            mDishReduce.setOnClickListener(this);
         }
 
-        public void bindDish(Dish dish) {
+        public void bindDish(Dish dish,Integer dishCount) {
             mDish = dish;
             mPhotoFile = DishLab.get(getActivity()).getPhotoFile(mDish);
             mTitleTextView.setText(mDish.getName());
             mDateTextView.setText(mDish.getDescription());
+            mDishCount.setText(dishCount.toString());
             updatePhotoView();
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = DishPagerActivity.newIntent(getActivity(), mDish.getId());
-            startActivity(intent);
+            ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
+            switch (v.getId()){
+                case R.id.dish_add:
+                    shoppingCart.increaseCount(mDish);
+                    updateUI();
+                    break;
+                case R.id.dish_reduce:
+                    shoppingCart.increaseCount(mDish);
+                    updateUI();
+                    break;
+                default:
+                    Intent intent = DishPagerActivity.newIntent(getActivity(), mDish.getId());
+                    startActivity(intent);
+                    break;
+            }
         }
 
         private void updatePhotoView(){
@@ -142,8 +171,5 @@ public class ShoppingCartFragment extends Fragment {
             }
         }
     }
-
-
-
 
 }

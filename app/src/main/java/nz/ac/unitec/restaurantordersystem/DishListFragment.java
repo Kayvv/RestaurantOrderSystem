@@ -58,7 +58,6 @@ public class DishListFragment extends Fragment {
         super.onResume();
         mDishRecyclerView.setAdapter(mAdapter);
         updateUI();
-        Log.d("DishListFragment","resume");
     }
 
     @Override
@@ -111,14 +110,12 @@ public class DishListFragment extends Fragment {
     public void updateUI(){
         DishLab dishLab = DishLab.get(getActivity());
         List<Dish> dishes = dishLab.getDishes();
-        Log.d(TAG,"updateUI");
         if (mAdapter == null) {
             mAdapter = new DishAdapter(dishes);
             mDishRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.setDishes(dishes);
             mAdapter.notifyDataSetChanged();
-            Log.d(TAG,"set dishes");
         }
         updateSubtitle();
     }
