@@ -95,7 +95,7 @@ public class DishLab {
         values.put(DishTable.Cols.UUID,dish.getId().toString());
         values.put(DishTable.Cols.NAME,dish.getName());
         values.put(DishTable.Cols.DESCRIPTION,dish.getDescription());
-        values.put(DishTable.Cols.PRICE,"test price");
+        values.put(DishTable.Cols.PRICE,dish.getPrice());
         values.put(DishTable.Cols.IMAGE, "test image");
 
         return values;

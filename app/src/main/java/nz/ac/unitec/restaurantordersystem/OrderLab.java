@@ -96,7 +96,6 @@ public class OrderLab {
         values.put(OrderTable.Cols.NAME,Order.getName());
         values.put(OrderTable.Cols.DESCRIPTION,Order.getDescription());
         values.put(OrderTable.Cols.PRICE,"test price");
-        values.put(OrderTable.Cols.IMAGE, "test image");
 
         return values;
     }

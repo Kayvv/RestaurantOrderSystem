@@ -35,9 +35,9 @@ public class DishFragment extends Fragment {
     //--field--
     private File mPhotoFile;
     private TextView mDishName;
+    private TextView mDishPrice;
     private TextView mDescription;
     private Dish mDish;
-    private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private Button mAddToShoppingCart;
 
@@ -57,7 +57,6 @@ public class DishFragment extends Fragment {
         UUID dishId = (UUID)getArguments().getSerializable(ARG_DISH_ID);
         mDish = DishLab.get(getActivity()).getDish(dishId);
         mPhotoFile = DishLab.get(getActivity()).getPhotoFile(mDish);
-
     }
 
     @Override
@@ -72,6 +71,8 @@ public class DishFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_dish, container, false);
         mDishName = (TextView)v.findViewById(R.id.dishName);
         mDishName.setText(mDish.getName());
+        mDishPrice = (TextView)v.findViewById(R.id.dishPrice);
+        mDishPrice.setText(mDish.getStringPrice());
         mDescription = (TextView)v.findViewById(R.id.dishDescription);
         mDescription.setText(mDish.getDescription());
         mAddToShoppingCart = (Button)v.findViewById(R.id.dishOrder);
@@ -82,28 +83,6 @@ public class DishFragment extends Fragment {
                 shoppingCart.addDish(mDish);
             }
         });
-
-        PackageManager packageManager = getActivity().getPackageManager();
-
-        mPhotoButton = (ImageButton) v.findViewById(R.id.dish_camera);
-        final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        boolean canTakePhoto = mPhotoFile != null &&
-                captureImage.resolveActivity(packageManager)!= null;
-        mPhotoButton.setEnabled(canTakePhoto);
-
-        if(canTakePhoto){
-            Uri uri = Uri.fromFile(mPhotoFile);
-            captureImage.putExtra(MediaStore.EXTRA_OUTPUT,uri);
-        }
-
-        mPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(captureImage,REQUEST_PHOTO);
-            }
-        });
-
 
         mPhotoView = (ImageView) v.findViewById(R.id.dish_photo);
         updatePhotoView();
@@ -133,5 +112,4 @@ public class DishFragment extends Fragment {
             mPhotoView.setImageBitmap(bitmap);
         }
     }
-
 }

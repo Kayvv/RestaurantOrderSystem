@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:hint="@string/dish_title_hint"/>
+            android:hint="@string/dish_price_hint"/>
     </LinearLayout>
 
 </LinearLayout>

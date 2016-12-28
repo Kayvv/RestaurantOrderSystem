@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ public class DishAddActivity extends Activity {
     //--field--
     private File mPhotoFile;
     private TextView mDishName;
+    private TextView mDishPrice;
     private TextView mDescription;
     private Dish mDish;
     private ImageButton mPhotoButton;
@@ -60,8 +62,51 @@ public class DishAddActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s!=null){
                     mDish.setName(s.toString());
+                    Log.d("Set Name",s.toString());
                 }
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mDishPrice = (EditText)findViewById(R.id.dish_price);
+        mDishPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s!=null){
+                    mDish.setPrice(Float.parseFloat(s.toString()));
+                    Log.d("Set Price",s.toString());
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mDescription = (EditText)findViewById(R.id.dish_description);
+        mDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s!=null){
+                    mDish.setDescription(s.toString());
+                }
             }
 
             @Override

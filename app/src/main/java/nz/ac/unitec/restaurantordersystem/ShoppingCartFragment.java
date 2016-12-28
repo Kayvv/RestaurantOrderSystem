@@ -46,6 +46,8 @@ public class ShoppingCartFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mDishRecyclerView.setAdapter(mAdapter);
+        ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
+        shoppingCart.renewList();
         updateUI();
         Log.d("ShoppingCartFragment","resume");
     }
@@ -63,9 +65,6 @@ public class ShoppingCartFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
     }
-
-
-
 
     public class DishAdapter extends RecyclerView.Adapter<ShoppingCartFragment.DishHolder> {
 
@@ -147,11 +146,11 @@ public class ShoppingCartFragment extends Fragment {
             ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
             switch (v.getId()){
                 case R.id.dish_add:
-                    shoppingCart.increaseCount(mDish);
+                    shoppingCart.addDish(mDish);
                     updateUI();
                     break;
                 case R.id.dish_reduce:
-                    shoppingCart.increaseCount(mDish);
+                    shoppingCart.decreaseCount(mDish);
                     updateUI();
                     break;
                 default:

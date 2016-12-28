@@ -26,13 +26,11 @@ public class OrderCursorWrapper extends CursorWrapper {
         String name = getString(getColumnIndex(OrderTable.Cols.NAME));
         String description = getString(getColumnIndex(OrderTable.Cols.DESCRIPTION));
         Float price = getFloat(getColumnIndex(OrderTable.Cols.PRICE));
-        String image = getString(getColumnIndex(OrderTable.Cols.IMAGE));
 
         Order Order = new Order(UUID.fromString(uuidString));
         Order.setName(name);
         Order.setDescription(description);
         Order.setPrice(price);
-        Order.setImage(image);
         return Order;
     }
 }

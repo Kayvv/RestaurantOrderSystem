@@ -24,8 +24,7 @@ public class OrderBaseHelper extends SQLiteOpenHelper {
                 OrderTable.Cols.UUID+", "+
                 OrderTable.Cols.NAME+", "+
                 OrderTable.Cols.DESCRIPTION+", "+
-                OrderTable.Cols.PRICE+", "+
-                OrderTable.Cols.IMAGE+")"
+                OrderTable.Cols.PRICE+")"
         );
 
     }

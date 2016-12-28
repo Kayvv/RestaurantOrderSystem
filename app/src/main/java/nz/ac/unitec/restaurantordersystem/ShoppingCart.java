@@ -62,8 +62,7 @@ public class ShoppingCart {
         return dishCount;
     }
 
-    public void increaseCount(Dish d){
-        Boolean alreadyIn = false;
+    public void decreaseCount(Dish d){
         if(orderedDishes.size()== 0){
             orderedDishes.add(d);
             dishCount.add(1);
@@ -71,20 +70,23 @@ public class ShoppingCart {
         }else{
             for(int i = 0;i<orderedDishes.size();i++){
                 if (d == orderedDishes.get(i)) {
-                    dishCount.set(i, dishCount.get(i) + 1);
-                    Log.d("ShoppingCart",orderedDishes.toString());
-                    alreadyIn =true;
+                    if(dishCount.get(i)>0){
+                        dishCount.set(i, dishCount.get(i) - 1);
+                        Log.d("ShoppingCart",orderedDishes.toString());
+                    }
                 }
             }
-            if(alreadyIn){
-            }
-            else {
-                orderedDishes.add(d);
-                dishCount.add(1);
-                Log.d("ShoppingCart",dishCount.toString());
-            }
         }
+    }
 
+    public void renewList(){
+            for(int i = 0;i<dishCount.size();i++){
+                if (dishCount.get(i) <= 0) {
+                    dishCount.remove(i);
+                    orderedDishes.remove(i);
+                    Log.d("remove",dishCount.toString());
+                }
+            }
     }
 
     public File getPhotoFile(Dish dish) {

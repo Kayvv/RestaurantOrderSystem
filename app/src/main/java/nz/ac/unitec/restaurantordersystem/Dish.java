@@ -59,6 +59,11 @@ public class Dish {
         return mPrice;
     }
 
+    public String getStringPrice(){
+        String s = Float.toString(mPrice);
+        return s;
+    }
+
     public void setPrice(float price) {
         mPrice = price;
     }

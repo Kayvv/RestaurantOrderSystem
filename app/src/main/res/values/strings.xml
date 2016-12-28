@@ -2,6 +2,8 @@
     <string name="app_name">RestaurantOrderSystem</string>
     <string name="dish_title_label">Title</string>
     <string name="dish_title_hint">Dish Title</string>
+    <string name="dish_price_hint">Dish Price</string>
+    <string name="dish_description_hint">Dish Description</string>
     <string name="dish_name">Dish Name</string>
     <string name="dish_save">Add New Dish</string>
     <string name="new_dish">New Dish</string>
