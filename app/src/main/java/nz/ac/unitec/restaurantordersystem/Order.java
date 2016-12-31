@@ -1,6 +1,6 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -9,29 +9,23 @@ import java.util.UUID;
 public class Order {
     //--field--
     private UUID mId;
-    private ArrayList<Dish> mOrderedDish;
-    private float mTotaPrice;
+    private List<Dish> mOrderedDish;
+    private List<Integer> mDishCount;
+    private float mTotalPrice;
     private String mState;
     private Boolean mPaid;
 
 
-    //--field--
-    private String mName;
-    private String mDescription;
-    private float mPrice;
-    private String mImage;
 
-
-    public Order(){
+    public Order(List<Dish> orderedDish, List<Integer> dishCount){
         mId = UUID.randomUUID();
-        mName = "Dish test";
-        mDescription = "Description test";
+        mOrderedDish = orderedDish;
+        mDishCount = dishCount;
+        mPaid = false;
     }
 
     public Order(UUID id){
         mId = id;
-        mName = "Dish test";
-        mDescription = "Description test";
     }
 
 
@@ -39,40 +33,13 @@ public class Order {
         return mId;
     }
 
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public String getImage() {
-        return mImage;
-    }
-
-    public void setImage(String image) {
-        mImage = image;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
 
     public float getPrice() {
-        return mPrice;
+        return mTotalPrice;
     }
 
     public void setPrice(float price) {
-        mPrice = price;
-    }
-
-    public String getPhotoFilename() {
-        return "IMG_" + getId().toString() + ".jpg";
+        mTotalPrice = price;
     }
 
 }

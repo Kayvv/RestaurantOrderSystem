@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton mUserInfo;
     private Fragment mDishListFragment = new DishListFragment();
     private Fragment mShoppingCartFragment = new ShoppingCartFragment();
+    private Fragment mOrderListFragment = new OrderListFragment();
 
 
     @Override
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("ShoppingCart","ShoppingCart");
                 break;
             case R.id.order_list:
-                setFragment(mShoppingCartFragment);
+                setFragment(mOrderListFragment);
                 Log.d("OrderList","OrderList");
                 break;
             case R.id.user_info:
