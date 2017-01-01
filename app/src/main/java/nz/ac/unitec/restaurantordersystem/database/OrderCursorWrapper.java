@@ -23,13 +23,13 @@ public class OrderCursorWrapper extends CursorWrapper {
 
     public Order getOrder() {
         String uuidString = getString(getColumnIndex(OrderTable.Cols.UUID));
-        String name = getString(getColumnIndex(OrderTable.Cols.NAME));
-        String description = getString(getColumnIndex(OrderTable.Cols.DESCRIPTION));
+        String dishId = getString(getColumnIndex(OrderTable.Cols.DISHID));
+        String dishCount = getString(getColumnIndex(OrderTable.Cols.COUNT));
         Float price = getFloat(getColumnIndex(OrderTable.Cols.PRICE));
 
         Order Order = new Order(UUID.fromString(uuidString));
-        Order.setName(name);
-        Order.setDescription(description);
+        Order.setOrderedDish(dishId);
+        Order.setDishCount(dishCount);
         Order.setPrice(price);
         return Order;
     }

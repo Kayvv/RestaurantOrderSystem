@@ -73,14 +73,6 @@ public class OrderLab {
         }
     }
 
-    public File getPhotoFile(Order Order) {
-        File externalFilesDir = mContext
-                .getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        if (externalFilesDir == null) {
-            return null;
-        }
-        return new File(externalFilesDir, Order.getPhotoFilename());
-    }
 
     public void updateOrder(Order Order) {
         String uuidString = Order.getId().toString();
@@ -93,8 +85,8 @@ public class OrderLab {
     private static ContentValues getContentValues(Order Order){
         ContentValues values = new ContentValues();
         values.put(OrderTable.Cols.UUID,Order.getId().toString());
-        values.put(OrderTable.Cols.NAME,Order.getName());
-        values.put(OrderTable.Cols.DESCRIPTION,Order.getDescription());
+        values.put(OrderTable.Cols.DISHID,Order);
+        values.put(OrderTable.Cols.COUNT,Order);
         values.put(OrderTable.Cols.PRICE,"test price");
 
         return values;

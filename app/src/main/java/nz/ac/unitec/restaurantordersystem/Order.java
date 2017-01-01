@@ -1,5 +1,7 @@
 package nz.ac.unitec.restaurantordersystem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +11,7 @@ import java.util.UUID;
 public class Order {
     //--field--
     private UUID mId;
-    private List<Dish> mOrderedDish;
+    private List<UUID> mOrderedDish;
     private List<Integer> mDishCount;
     private float mTotalPrice;
     private String mState;
@@ -17,7 +19,7 @@ public class Order {
 
 
 
-    public Order(List<Dish> orderedDish, List<Integer> dishCount){
+    public Order(List<UUID> orderedDish, List<Integer> dishCount){
         mId = UUID.randomUUID();
         mOrderedDish = orderedDish;
         mDishCount = dishCount;
@@ -33,6 +35,50 @@ public class Order {
         return mId;
     }
 
+    public List<UUID> getOrderedDish() {
+        return mOrderedDish;
+    }
+
+    public void setOrderedDish(String mDishId) {
+        List<String> myList = new ArrayList<>(Arrays.asList(mDishId.split(",")));
+        for(int i = 0; i <myList.size();i++){
+            UUID uid = UUID.fromString(myList.get(i));
+            this.mOrderedDish.add(uid);
+        }
+    }
+
+
+    public void setId(UUID mId) {
+        this.mId = mId;
+    }
+
+    public List<Integer> getDishCount() {
+        return mDishCount;
+    }
+
+    public void setDishCount(String mDishCount) {
+        List<String> myList = new ArrayList<>(Arrays.asList(mDishCount.split(",")));
+        for(int i = 0; i <myList.size();i++){
+            Integer count = Integer.parseInt(myList.get(i));
+            this.mDishCount.add(count);
+        }
+    }
+
+    public String getState() {
+        return mState;
+    }
+
+    public void setState(String mState) {
+        this.mState = mState;
+    }
+
+    public Boolean isPaid() {
+        return mPaid;
+    }
+
+    public void setPaid(Boolean mPaid) {
+        this.mPaid = mPaid;
+    }
 
     public float getPrice() {
         return mTotalPrice;

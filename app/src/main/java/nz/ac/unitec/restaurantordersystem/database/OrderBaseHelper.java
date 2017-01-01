@@ -22,8 +22,8 @@ public class OrderBaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table "+ OrderTable.NAME+"("+
                 " _id integer primary key autoincrement, "+
                 OrderTable.Cols.UUID+", "+
-                OrderTable.Cols.NAME+", "+
-                OrderTable.Cols.DESCRIPTION+", "+
+                OrderTable.Cols.DISHID+", "+
+                OrderTable.Cols.COUNT+", "+
                 OrderTable.Cols.PRICE+")"
         );
 
