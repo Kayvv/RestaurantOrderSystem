@@ -83,7 +83,7 @@ public class OrderListFragment extends Fragment{
         @Override
         public OrderHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_dish, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_order, parent, false);
             return new OrderHolder(view);
         }
 
@@ -108,17 +108,13 @@ public class OrderListFragment extends Fragment{
     private class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        private ImageView mPhotoView;
-        private File mPhotoFile;
-
+        private Order mOrder;
         private Dish mDish;
 
         public OrderHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mPhotoView = (ImageView)
-                    itemView.findViewById(R.id.dish_photo);
             mTitleTextView = (TextView)
                     itemView.findViewById(R.id.list_item_dish_title_text_view);
             mDateTextView = (TextView)
@@ -127,10 +123,8 @@ public class OrderListFragment extends Fragment{
 
         public void bindDish(Dish dish) {
             mDish = dish;
-            mPhotoFile = DishLab.get(getActivity()).getPhotoFile(mDish);
             mTitleTextView.setText(mDish.getName());
             mDateTextView.setText(mDish.getDescription());
-            updatePhotoView();
         }
 
         @Override
@@ -139,15 +133,6 @@ public class OrderListFragment extends Fragment{
             startActivity(intent);
         }
 
-        private void updatePhotoView(){
-            if(mPhotoFile == null|| !mPhotoFile.exists()){
-                mPhotoView.setImageDrawable(null);
-            }else{
-                Bitmap bitmap = PictureUtils.getScaledBitmap(
-                        mPhotoFile.getPath(),getActivity());
-                mPhotoView.setImageBitmap(bitmap);
-            }
-        }
     }
 
 }

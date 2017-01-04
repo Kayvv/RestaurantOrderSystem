@@ -39,6 +39,15 @@ public class Order {
         return mOrderedDish;
     }
 
+    public String getOrderedDishToString() {
+        String dishIds= "";
+        for(UUID dishId : mOrderedDish){
+            dishId.toString();
+            dishIds += dishId +",";
+        }
+        return dishIds;
+    }
+
     public void setOrderedDish(String mDishId) {
         List<String> myList = new ArrayList<>(Arrays.asList(mDishId.split(",")));
         for(int i = 0; i <myList.size();i++){
@@ -54,6 +63,15 @@ public class Order {
 
     public List<Integer> getDishCount() {
         return mDishCount;
+    }
+
+    public String getDishCountToString() {
+        String dishCount= "";
+        for(Integer dishcount : mDishCount){
+            dishcount.toString();
+            dishCount += dishcount +",";
+        }
+        return dishCount;
     }
 
     public void setDishCount(String mDishCount) {
