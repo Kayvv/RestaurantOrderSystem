@@ -11,7 +11,7 @@ import nz.ac.unitec.restaurantordersystem.database.OrderDbSchema.OrderTable;
  */
 public class OrderBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "OrderBase.db";
+    private static final String DATABASE_NAME = "dishBase.db";
 
     public OrderBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);

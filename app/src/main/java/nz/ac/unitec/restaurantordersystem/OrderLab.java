@@ -38,7 +38,7 @@ public class OrderLab {
         mDatabase.insert(OrderTable.NAME,null,values);
     }
 
-    public List<Order> getOrderes(){
+    public List<Order> getOrders(){
         List<Order> Orders = new ArrayList<>();
         OrderCursorWrapper cursor = queryOrders(null, null);
         try {

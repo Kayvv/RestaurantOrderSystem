@@ -2,22 +2,17 @@ package nz.ac.unitec.restaurantordersystem;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
 
 /**
  * Created by Kay on 2016/12/31.
@@ -41,7 +36,6 @@ public class OrderListFragment extends Fragment{
         mDishRecyclerView = (RecyclerView)view.findViewById(R.id.dish_recycler_view);
         mDishRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         updateUI();
 
         return view;
@@ -59,13 +53,13 @@ public class OrderListFragment extends Fragment{
 
 
     public void updateUI(){
-        DishLab dishLab = DishLab.get(getActivity());
-        List<Dish> dishes = dishLab.getDishes();
+        OrderLab orderLab = OrderLab.get(getActivity());
+        List<Order> orders = orderLab.getOrders();
         if (mAdapter == null) {
-            mAdapter = new OrderAdapter(dishes);
+            mAdapter = new OrderAdapter(orders);
             mDishRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setDishes(dishes);
+            mAdapter.setOrders(orders);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -74,10 +68,10 @@ public class OrderListFragment extends Fragment{
 
     public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
 
-        private List<Dish> mDishes;
+        private List<Order> mOrders;
 
-        public OrderAdapter(List<Dish> dishes){
-            mDishes = dishes;
+        public OrderAdapter(List<Order> orders){
+            mOrders = orders;
         }
 
         @Override
@@ -89,24 +83,24 @@ public class OrderListFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(OrderHolder holder, int position) {
-            Dish dish = mDishes.get(position);
-            holder.bindDish(dish);
+            Order order = mOrders.get(position);
+            holder.bindOrder(order);
         }
 
         @Override
         public int getItemCount() {
-            return mDishes.size();
+            return mOrders.size();
         }
 
-        public void setDishes(List<Dish> dishes) {
-            mDishes = dishes;
+        public void setOrders(List<Order> orders) {
+            mOrders = orders;
         }
 
     }
 
     //define the ViewHolder by inner class
     private class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView mTitleTextView;
+        private TextView mOrderedDishTextView;
         private TextView mDateTextView;
         private Order mOrder;
         private Dish mDish;
@@ -115,16 +109,22 @@ public class OrderListFragment extends Fragment{
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView)
-                    itemView.findViewById(R.id.list_item_dish_title_text_view);
-            mDateTextView = (TextView)
-                    itemView.findViewById(R.id.list_item_dish_date_text_view);
+            mOrderedDishTextView = (TextView)
+                    itemView.findViewById(R.id.ordered_dishes);
         }
 
-        public void bindDish(Dish dish) {
-            mDish = dish;
-            mTitleTextView.setText(mDish.getName());
-            mDateTextView.setText(mDish.getDescription());
+        public void bindOrder(Order order) {
+            mOrder = order;
+            String orderedDishes = "";
+            List<java.util.UUID> dishIds=mOrder.getOrderedDish();
+            List<Integer> dishCount = mOrder.getDishCount();
+            for (int i = 0; i < dishIds.size(); i++){
+                mDish = DishLab.get(getActivity()).getDish(dishIds.get(i));
+                Integer count = dishCount.get(i);
+                orderedDishes += mDish.getName() + " X ";
+                orderedDishes += count.toString() + "\n";
+            }
+            mOrderedDishTextView.setText(orderedDishes);
         }
 
         @Override
