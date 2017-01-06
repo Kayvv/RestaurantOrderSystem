@@ -10,13 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Kay on 2016/12/21.
@@ -34,9 +37,23 @@ public class ShoppingCartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_shopping_cart,container,false);
-
+        Button mCheckOut;
         mDishRecyclerView = (RecyclerView)view.findViewById(R.id.dish_recycler_view);
         mDishRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCheckOut = (Button)view.findViewById(R.id.checkOut);
+        mCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
+                List<UUID> orderedDishId = new ArrayList<>();
+                for(Dish dish : shoppingCart.getDishes()){
+                    orderedDishId.add(dish.getId());
+                    Log.d("ordereddish",orderedDishId.toString());
+                }
+                Order mOrder = new Order(orderedDishId,shoppingCart.getDishCount());
+                OrderLab.get(getActivity()).addOrder(mOrder);
+            }
+        });
         updateUI();
         return view;
     }

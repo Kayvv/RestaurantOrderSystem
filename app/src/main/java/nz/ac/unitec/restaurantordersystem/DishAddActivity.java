@@ -84,7 +84,6 @@ public class DishAddActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s!=null){
                     mDish.setPrice(Float.parseFloat(s.toString()));
-                    Log.d("Set Price",s.toString());
                 }
 
             }
