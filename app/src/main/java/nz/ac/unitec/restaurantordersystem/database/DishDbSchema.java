@@ -5,7 +5,7 @@ package nz.ac.unitec.restaurantordersystem.database;
  */
 public class DishDbSchema {
     public static final class DishTable{
-        public static final String NAME = "dish";
+        public static final String NAME = "Dish";
 
         public static final class Cols {
             public static final String UUID = "uuid";

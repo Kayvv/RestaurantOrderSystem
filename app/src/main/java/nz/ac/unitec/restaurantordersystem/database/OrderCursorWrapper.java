@@ -27,10 +27,10 @@ public class OrderCursorWrapper extends CursorWrapper {
         String dishCount = getString(getColumnIndex(OrderTable.Cols.COUNT));
         Float price = getFloat(getColumnIndex(OrderTable.Cols.PRICE));
 
-        Order Order = new Order(UUID.fromString(uuidString));
-        Order.setOrderedDish(dishId);
-        Order.setDishCount(dishCount);
-        Order.setPrice(price);
-        return Order;
+        Order order = new Order(UUID.fromString(uuidString));
+        order.setOrderedDish(dishId);
+        order.setDishCount(dishCount);
+        order.setPrice(price);
+        return order;
     }
 }

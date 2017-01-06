@@ -5,13 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import nz.ac.unitec.restaurantordersystem.database.DishBaseHelper;
+import nz.ac.unitec.restaurantordersystem.database.DatabaseHelper;
 import nz.ac.unitec.restaurantordersystem.database.DishCursorWrapper;
 import nz.ac.unitec.restaurantordersystem.database.DishDbSchema.DishTable;
 
@@ -27,7 +28,8 @@ public class DishLab {
 
     private DishLab(Context appContext) {
         mContext = appContext.getApplicationContext();
-        mDatabase = new DishBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
+        Log.d("dish","database");
     }
 
     public static DishLab get(Context context){

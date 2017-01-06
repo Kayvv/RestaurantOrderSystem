@@ -4,10 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import nz.ac.unitec.restaurantordersystem.database.OrderBaseHelper;
+
+import nz.ac.unitec.restaurantordersystem.database.DatabaseHelper;
 import nz.ac.unitec.restaurantordersystem.database.OrderCursorWrapper;
 import nz.ac.unitec.restaurantordersystem.database.OrderDbSchema.OrderTable;
 
@@ -23,7 +26,8 @@ public class OrderLab {
 
     private OrderLab(Context appContext) {
         mContext = appContext.getApplicationContext();
-        mDatabase = new OrderBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
+        Log.d("order","database");
     }
 
     public static OrderLab get(Context context){
@@ -81,8 +85,8 @@ public class OrderLab {
     private static ContentValues getContentValues(Order Order){
         ContentValues values = new ContentValues();
         values.put(OrderTable.Cols.UUID,Order.getId().toString());
-        values.put(OrderTable.Cols.DISHID,Order.getOrderedDishToString());
-        values.put(OrderTable.Cols.COUNT,Order.getDishCountToString());
+        //values.put(OrderTable.Cols.DISHID,Order.getOrderedDishToString());
+        //values.put(OrderTable.Cols.COUNT,Order.getDishCountToString());
         values.put(OrderTable.Cols.PRICE,"test price");
 
         return values;
