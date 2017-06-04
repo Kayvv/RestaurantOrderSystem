@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
-import java.util.UUID;
 
 
 /**
@@ -32,12 +30,9 @@ public class OrderListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_dish_list,container,false);
-
         mDishRecyclerView = (RecyclerView)view.findViewById(R.id.dish_recycler_view);
         mDishRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         updateUI();
-
         return view;
     }
 
@@ -47,10 +42,6 @@ public class OrderListFragment extends Fragment{
         mDishRecyclerView.setAdapter(mAdapter);
         updateUI();
     }
-
-
-
-
 
     public void updateUI(){
         OrderLab orderLab = OrderLab.get(getActivity());

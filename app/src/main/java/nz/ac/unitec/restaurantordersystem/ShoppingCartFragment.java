@@ -48,7 +48,6 @@ public class ShoppingCartFragment extends Fragment {
                 List<UUID> orderedDishId = new ArrayList<>();
                 for(Dish dish : shoppingCart.getDishes()){
                     orderedDishId.add(dish.getId());
-                    Log.d("ordereddish",orderedDishId.toString());
                 }
                 Order mOrder = new Order(orderedDishId,shoppingCart.getDishCount());
                 OrderLab.get(getActivity()).addOrder(mOrder);
@@ -58,7 +57,6 @@ public class ShoppingCartFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -66,7 +64,6 @@ public class ShoppingCartFragment extends Fragment {
         ShoppingCart shoppingCart = ShoppingCart.get(getActivity());
         shoppingCart.renewList();
         updateUI();
-        Log.d("ShoppingCartFragment","resume");
     }
 
     public void updateUI(){
@@ -75,7 +72,6 @@ public class ShoppingCartFragment extends Fragment {
         List<Integer> dishCount = shoppingCart.getDishCount();
         if (mAdapter == null) {
             mAdapter = new DishAdapter(dishes,dishCount);
-            Log.d("test",dishes.toString());
             mDishRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.setDishes(dishes,dishCount);
@@ -116,7 +112,6 @@ public class ShoppingCartFragment extends Fragment {
             mDishes = dishes;
             mDishCount = dishCount;
         }
-
     }
 
     //define the ViewHolder by inner class
@@ -128,8 +123,6 @@ public class ShoppingCartFragment extends Fragment {
         private EditText mDishCount;
         private ImageButton mDishReduce;
         private ImageButton mDishAdd;
-
-
         private Dish mDish;
 
         public DishHolder(View itemView) {
@@ -187,5 +180,4 @@ public class ShoppingCartFragment extends Fragment {
             }
         }
     }
-
 }

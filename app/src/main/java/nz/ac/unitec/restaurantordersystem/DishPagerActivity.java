@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.view.Window;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,6 +36,17 @@ public class DishPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
+        //退出时使用
+        getWindow().setExitTransition(explode);
+//第一次进入时使用
+        getWindow().setEnterTransition(explode);
+//再次进入时使用
+        getWindow().setReenterTransition(explode);
+
+
         setContentView(R.layout.activity_dish_pager);
 
         UUID dishId = (UUID) getIntent()

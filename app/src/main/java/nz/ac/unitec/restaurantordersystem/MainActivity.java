@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment mDishListFragment = new DishListFragment();
     private Fragment mShoppingCartFragment = new ShoppingCartFragment();
     private Fragment mOrderListFragment = new OrderListFragment();
+    private Fragment mUserInfoFragment = new UserInfoFragment();
 
 
     @Override
@@ -60,19 +61,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.dish_list:
                 setFragment(mDishListFragment);
-                Log.d("DishList","DishListFragment");
                 break;
             case R.id.shopping_cart:
                 setFragment(mShoppingCartFragment);
-                Log.d("ShoppingCart","ShoppingCart");
                 break;
             case R.id.order_list:
                 setFragment(mOrderListFragment);
-                Log.d("OrderList","OrderList");
                 break;
             case R.id.user_info:
-                setFragment(mShoppingCartFragment);
-                Log.d("UserInfo","UserInfo");
+                setFragment(mUserInfoFragment);
                 break;
             default:
                 break;

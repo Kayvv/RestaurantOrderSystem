@@ -8,10 +8,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -68,6 +71,15 @@ public class DishFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        Transition explode = TransitionInflater.from(getActivity()).inflateTransition(R.transition.explode);
+        //退出时使用
+        getActivity().getWindow().setExitTransition(explode);
+//第一次进入时使用
+        getActivity().getWindow().setEnterTransition(explode);
+//再次进入时使用
+        getActivity().getWindow().setReenterTransition(explode);
+
         View v = inflater.inflate(R.layout.fragment_dish, container, false);
         mDishName = (TextView)v.findViewById(R.id.dishName);
         mDishName.setText(mDish.getName());

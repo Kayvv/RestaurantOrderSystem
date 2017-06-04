@@ -27,7 +27,6 @@ public class OrderLab {
     private OrderLab(Context appContext) {
         mContext = appContext.getApplicationContext();
         mDatabase = new DatabaseHelper(mContext).getWritableDatabase();
-        Log.d("order","database");
     }
 
     public static OrderLab get(Context context){
@@ -86,7 +85,6 @@ public class OrderLab {
         ContentValues values = new ContentValues();
         values.put(OrderTable.Cols.UUID,Order.getId().toString());
         values.put(OrderTable.Cols.DISHID,Order.getOrderedDishToString());
-        Log.d("input dish id",Order.getOrderedDishToString());
         values.put(OrderTable.Cols.COUNT,Order.getDishCountToString());
         values.put(OrderTable.Cols.PRICE,"test price");
 

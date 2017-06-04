@@ -25,7 +25,6 @@ public class OrderCursorWrapper extends CursorWrapper {
     public Order getOrder() {
         String uuidString = getString(getColumnIndex(OrderTable.Cols.UUID));
         String dishId = getString(getColumnIndex(OrderTable.Cols.DISHID));
-        Log.d("get dish id",dishId);
         String dishCount = getString(getColumnIndex(OrderTable.Cols.COUNT));
         Float price = getFloat(getColumnIndex(OrderTable.Cols.PRICE));
 

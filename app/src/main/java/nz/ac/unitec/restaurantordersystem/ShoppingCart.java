@@ -16,6 +16,7 @@ public class ShoppingCart {
     private Context mContext;
     private List<Dish> orderedDishes=new ArrayList<>();
     private List<Integer> dishCount=new ArrayList<>();
+    private Float mTotalPrice;
 
 
 
@@ -35,12 +36,10 @@ public class ShoppingCart {
         if(orderedDishes.size()== 0){
             orderedDishes.add(d);
             dishCount.add(1);
-            Log.d("OrderDishNull",dishCount.toString());
         }else{
             for(int i = 0;i<orderedDishes.size();i++){
                 if (d == orderedDishes.get(i)) {
                     dishCount.set(i, dishCount.get(i) + 1);
-                    Log.d("ShoppingCart",orderedDishes.toString());
                     alreadyIn =true;
                 }
             }
@@ -49,7 +48,6 @@ public class ShoppingCart {
             else {
                 orderedDishes.add(d);
                 dishCount.add(1);
-                Log.d("ShoppingCart",dishCount.toString());
             }
         }
     }
@@ -66,17 +64,16 @@ public class ShoppingCart {
         if(orderedDishes.size()== 0){
             orderedDishes.add(d);
             dishCount.add(1);
-            Log.d("OrderDishNull",dishCount.toString());
         }else{
             for(int i = 0;i<orderedDishes.size();i++){
                 if (d == orderedDishes.get(i)) {
                     if(dishCount.get(i)>0){
                         dishCount.set(i, dishCount.get(i) - 1);
-                        Log.d("ShoppingCart",orderedDishes.toString());
                     }
                 }
             }
         }
+        setTotalPrice(d);
     }
 
     public void renewList(){
@@ -98,5 +95,13 @@ public class ShoppingCart {
         return new File(externalFilesDir, dish.getPhotoFilename());
     }
 
+    public Float getTotalPrice() {
+        return mTotalPrice;
+    }
 
+    public void setTotalPrice(Dish d) {
+        d.getPrice();
+
+        this.mTotalPrice = mTotalPrice;
+    }
 }

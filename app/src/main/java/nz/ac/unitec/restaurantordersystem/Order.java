@@ -1,7 +1,5 @@
 package nz.ac.unitec.restaurantordersystem;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +42,6 @@ public class Order {
     public String getOrderedDishToString() {
         String dishIds= "";
         if(mOrderedDish.size()>1) {
-            Log.d("size", String.valueOf(mOrderedDish.size()));
             for (UUID dishId : mOrderedDish) {
                 dishId.toString();
                 dishIds += dishId + ",";
@@ -56,7 +53,6 @@ public class Order {
     }
 
     public void setOrderedDish(String mDishId) {
-        Log.d("mdish id", mDishId);
         if(mDishId.contains(",")) {
             List<String> myList = new ArrayList<>(Arrays.asList(mDishId.split(",")));
             for (int i = 0; i < myList.size(); i++) {
@@ -65,7 +61,6 @@ public class Order {
             }
         }else{
             UUID uid = UUID.fromString(mDishId);
-            Log.d("uid id", uid.toString());
             this.mOrderedDish.add(uid);
         }
     }
